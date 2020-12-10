@@ -1,7 +1,8 @@
 
-var clearBtn;
 
-  $("#searchBtn").on("click", function() {
+
+  $("#searchBtn").on("click", function(event) {
+    event.preventDefault();
     var searchTerm = $("#search").val();
     var numRecords = $("#retrieveCount").val();
     var startYear = $("#startYear").val();
@@ -29,3 +30,10 @@ var clearBtn;
         console.log(results);
     })
   });
+
+  $("#clearBtn").click(function(){
+     $("#search").val("");
+     $("#retrieveCount").val("");
+     $("#startYear").val("");
+     $("#endYear").val("");
+  })
