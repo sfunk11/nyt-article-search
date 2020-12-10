@@ -13,10 +13,10 @@
     searchTerm;
 
     if (startYear !== ""){
-        queryURL = queryURL + "&" + startYear;
+        queryURL = queryURL + "&begin_date=" + startYear+"0101";
     }
     if (endYear !== ""){
-        queryURL = queryURL + "&" + endYear;
+        queryURL = queryURL + "&end_date=" + endYear+"1231";
     }
    
    
