@@ -26,8 +26,14 @@
       method: "GET"
     }).then(function(response) {
         results = response.response.docs;
-
         console.log(results);
+        
+    for (var i = 0; i < numRecords; i++){
+      articleDiv = $("<div>");
+      headlineDiv = $("<h2>").html(results[i].headline.main);
+      articleDiv.append(headlineDiv);
+      $("#article-section").append(articleDiv)
+    }
     })
   });
 
