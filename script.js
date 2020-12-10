@@ -25,14 +25,57 @@
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-        results = response.response.docs;
-        console.log(results);
+        articles = response.response.docs;
+        console.log(articles);
         
     for (var i = 0; i < numRecords; i++){
-      articleDiv = $("<div>");
-      headlineDiv = $("<h2>").html(results[i].headline.main);
-      articleDiv.append(headlineDiv);
-      $("#article-section").append(articleDiv)
+      articleCount = i+1;
+      $articleList = $("<ul>");
+      $("#article-section").append($articleList)
+    
+      var headline = articles[i].headline;
+      var $articleListItem = $("<li class='list-group-item articleHeadline'>");
+  
+      if (headline && headline.main) {
+        console.log(headline.main);
+        $articleListItem.append(
+          "<span class='label label-primary'>" +
+            articleCount +
+            "</span>" +
+            "<strong> " +
+            headline.main +
+            "</strong>"
+        );
+      }
+  
+      // If the article has a byline, log and append to $articleList
+      var byline = articles[i].byline;
+  
+      if (byline && byline.original) {
+        console.log(byline.original);
+        $articleListItem.append("<h5>" + byline.original + "</h5>");
+      }
+  
+      // Log section, and append to document if exists
+      var section = articles[i].section_name;
+      console.log(articles[i].section_name);
+      if (section) {
+        $articleListItem.append("<h5>Section: " + section + "</h5>");
+      }
+  
+      // Log published date, and append to document if exists
+      var pubDate = articles[i].pub_date;
+      console.log(articles[i].pub_date);
+      if (pubDate) {
+        $articleListItem.append("<h5>" + articles[i].pub_date + "</h5>");
+      }
+  
+      // Append and log url
+      $articleListItem.append("<a href='" + articles[i].web_url + "'>" + articles[i].web_url + "</a>");
+      console.log(articles[i].web_url);
+  
+      // Append the article
+      $articleList.append($articleListItem);
     }
     })
   });
